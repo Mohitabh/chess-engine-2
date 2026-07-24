@@ -65,6 +65,14 @@ class TestSearch(unittest.TestCase):
         self.assertEqual(move.uci(), "d1d8")
         self.assertGreater(score, 900_000)
 
+    def test_finds_mate_in_two(self):
+        # White can mate in two: either 1. Re1 Kf8 2. Rh8# or 1. Rh8+ Kxh8 2. Rf8#
+        board = Board("6k1/6pR/6P1/8/8/8/8/5RK1 w - - 0 1")
+        engine = Engine()
+        move, score, stats = engine.search(board, max_depth=3)
+        self.assertIn(move.uci(), {"f1e1", "h7h8"})
+        self.assertGreater(score, 900_000)
+
     def test_prefers_free_material(self):
         # White rook on a1 can capture a hanging bishop on a2 for free.
         board = Board("4k3/8/8/8/8/8/b7/R3K3 w Q - 0 1")
