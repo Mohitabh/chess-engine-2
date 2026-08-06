@@ -49,38 +49,42 @@ A lightweight, from-scratch chess engine implemented in pure Python. It uses a *
 
 This project uses the Python 3 standard library and has **zero third-party dependencies**.
 
+You can run the engine using the `./run.sh` helper script. It automatically detects if the **PyPy3** JIT compiler is installed (to leverage a 5x–20x speedup) and seamlessly falls back to standard **Python 3** if it isn't.
+
 ### Play Against the Engine
 Start a game from the terminal. By default, you play White, and the engine plays Black at search depth 4:
 ```bash
-python3 cli.py --depth 4
+./run.sh --depth 4
 ```
 
 To watch the engine play against itself, or to play as Black:
 ```bash
 # Engine plays both sides
-python3 cli.py --engine-color white --depth 4
+./run.sh --engine-color white --depth 4
 
 # Play as Black
-python3 cli.py --engine-color white --depth 4
+./run.sh --engine-color white --depth 4
 ```
 
 ### Run Benchmarks
 Measure search nodes per second (NPS) across different search depths:
 ```bash
-python3 benchmark.py 3
+./run.sh benchmark 3
 ```
 
 ### Run Perft Verification
 Verify the move generator's correctness against standard perft node counts:
 ```bash
-python3 perft.py 4
+./run.sh perft 4
 ```
 
 ### Run Unit Tests
 Execute the test suite to verify the movegen rules and search stability:
 ```bash
-python3 -m unittest discover -s tests
+./run.sh test
 ```
+
+*(Note: You can still execute individual files directly using `python3 cli.py`, `python3 benchmark.py`, etc., if preferred).*
 
 ---
 
